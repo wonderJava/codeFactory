@@ -26,7 +26,7 @@
 <!-- ****************************************************************-->
  <!-- select查询语句 Start-->
 <!-- huchao -->
-<!-- 根据${huchao1}表组查询表信息 -->
+<!-- 根据${huchao_1}表组查询表信息 -->
    <select id="query${className}ByCond" resultType="java.util.Map" parameterType="java.util.Map">
    	select <include refid="Base_${className}"/> from ${table.sqlName} a
    	where 1=1  
@@ -37,7 +37,7 @@
 	     </#list>
       order by a.id asc
 	<if test="pageFlag == 'true' ">
-	  	limit <@mapperEl startRow/> ,<@mapperEl pageSize/> 
+	  	limit <@mapperEl huchao_startRow/> ,<@mapperEl huchao_pageSize/> 
 	</if> 
    </select>
 <!-- huchao -->
@@ -87,7 +87,7 @@
  <!-- delecte删除语句 Start-->
  <delete id="deleteById" parameterType="java.util.Map" >
       DELETE FROM ${table.sqlName} 
-      WHERE id = <@mapperEl id/>
+      WHERE id = <@mapperEl huchao_id/>
    </delete>
  <!-- delecte删除语句 End-->
 </mapper>

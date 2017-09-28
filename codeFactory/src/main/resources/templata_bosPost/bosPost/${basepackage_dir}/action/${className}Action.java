@@ -25,7 +25,7 @@ import ${basepackage}.util.MapUtil;
 /**
  * @author huchao
  * @version 1.0
- * @description ${huchao1}的增删改查
+ * @description ${huchao_1}的增删改查
  *  
  */
 @Controller
@@ -44,7 +44,7 @@ public class ${className}Action {
 	}
 
 	/**
-	 * @description 增加${huchao1}
+	 * @description 增加${huchao_1}
 	 * @return
 	 * @<#if now??>${now?string('yyyy-MM-dd')}</#if>
 	 * @author huchao
@@ -61,14 +61,14 @@ public class ${className}Action {
 			outParams = ${classNameLower}Service.add${className}(params);
 		} catch (Exception e) {
 			outParams.setReturnCode(ComConstants.FAIL);
-			outParams.setReturnMsg("添加${huchao1}错误");
-			logger.error("添加${huchao1}错误", e);
+			outParams.setReturnMsg("添加${huchao_1}错误");
+			logger.error("添加${huchao_1}错误", e);
 		}
 		return JsonUtil.convertObject2Json(outParams);
 	}
 
 	/**
-	 * @description 查询所有的${huchao1}信息
+	 * @description 查询所有的${huchao_1}信息
 	 * @param response
 	 * @param request
 	 * @return
@@ -86,14 +86,14 @@ public class ${className}Action {
 			outParams = ${classNameLower}Service.query${className}ByCond(params);
 		} catch (BosException e) {
 			outParams.setReturnCode(ComConstants.FAIL);
-			outParams.setReturnMsg("查询${huchao1}错误");
-			logger.error("queryAll查询${huchao1}信息失败", e);
+			outParams.setReturnMsg("查询${huchao_1}错误");
+			logger.error("queryAll查询${huchao_1}信息失败", e);
 		}
 		return JsonUtil.convertObject2Json(outParams);
 	}
 	/**
 	 * @description
-	 *	修改${huchao1}数据
+	 *	修改${huchao_1}数据
 	 * @param response
 	 * @param request
 	 * @return
@@ -109,14 +109,14 @@ public class ${className}Action {
 			outParams=${classNameLower}Service.updateBy${className}Id(params);
 		} catch (Exception e) {
 			outParams.setReturnCode(ComConstants.FAIL);
-			outParams.setReturnMsg("修改${huchao1}错误");
-			logger.error("修改${huchao1}信息失败", e);
+			outParams.setReturnMsg("修改${huchao_1}错误");
+			logger.error("修改${huchao_1}信息失败", e);
 		}
 		return JsonUtil.convertObject2Json(outParams);
 	}
 	/**
 	 * @description
-	 *	删除${huchao1}数据
+	 *	删除${huchao_1}数据
 	 * @param response
 	 * @param request
 	 * @return
@@ -132,8 +132,8 @@ public class ${className}Action {
 			outParams=${classNameLower}Service.deleteById(params);
 		} catch (Exception e) {
 			outParams.setReturnCode(ComConstants.FAIL);
-			outParams.setReturnMsg("删除${huchao1}错误");
-			logger.error("删除${huchao1}信息失败", e);
+			outParams.setReturnMsg("删除${huchao_1}错误");
+			logger.error("删除${huchao_1}信息失败", e);
 		}
 		return JsonUtil.convertObject2Json(outParams);
 	}

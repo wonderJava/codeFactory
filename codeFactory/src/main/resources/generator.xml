@@ -11,10 +11,10 @@
       
     <!-- jsp namespace: web/${namespace}/${className}/list.jsp -->  
     <entry key="namespace">pages</entry>  
-    <entry key="huchao1">地区</entry>  
-    <entry key="startRow">startRow</entry>  
-    <entry key="pageSize">pageSize</entry>  
-    <entry key="id">id</entry>  
+    <entry key="huchao_1">地区</entry>  
+    <entry key="huchao_startRow">startRow</entry>  
+    <entry key="huchao_pageSize">pageSize</entry>  
+    <entry key="huchao_id">id</entry>  
    
       
     <entry key="outRoot">\generator-output</entry>

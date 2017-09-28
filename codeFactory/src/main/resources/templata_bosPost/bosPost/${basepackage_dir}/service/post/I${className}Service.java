@@ -12,12 +12,12 @@ import cn.huchao.bean.OutParams;
  * @author huchao
  * @<#if now??>${now?string('yyyy-MM-dd')}</#if>
  * @description
- *  ${huchao1}的业务接口
+ *  ${huchao_1}的业务接口
  */
 public interface I${className}Service {
 	/**
 	 * @description
-	 *	增加${huchao1}
+	 *	增加${huchao_1}
 	 * @param beanIn
 	 * @return
 	 * @throws BosException
@@ -27,7 +27,7 @@ public interface I${className}Service {
 	public OutParams add${className}(Map<String, Object> beanIn) throws BosException;
 	/**
 	 * @description
-	 *	根据条件查询${huchao1}
+	 *	根据条件查询${huchao_1}
 	 * @param beanIn
 	 * @return
 	 * @throws BosException
@@ -37,7 +37,7 @@ public interface I${className}Service {
 	public OutParams query${className}ByCond(Map<String, Object> beanIn) throws BosException;
 	/**
 	 * @description
-	 *	根据${huchao1}Id修改${huchao1}
+	 *	根据${huchao_1}Id修改${huchao_1}
 	 * @param beanIn
 	 * @return
 	 * @throws BosException
@@ -46,7 +46,7 @@ public interface I${className}Service {
 	 */
 	public OutParams updateBy${className}Id(Map<String, Object> beanIn) throws BosException;
 	/**
-	 * @description 根据Id删除${huchao1}
+	 * @description 根据Id删除${huchao_1}
 	 * @param beanIn
 	 * @return
 	 * @throws BosException

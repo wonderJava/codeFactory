@@ -6,7 +6,7 @@ public class CodeGenerator {
 
 	public static void main(String[] args) throws Exception {
         //模板路径，需要指定磁盘绝对路径，
-		String templatePath = "D:/EclipseEE64/MyCode/codeFactory_Maven_Webapp/src/main/resources/templata_bosPost";
+		String templatePath = "G:/gitPriCode/codeFactory/codeFactory/src/main/resources/templata_bosPost";
 		//String templatePath = "D:/EclipseEE64/MyCode/codeFactory_Maven_Webapp/src/main/resources/template";
 		
 		GeneratorFacade g = new GeneratorFacade();

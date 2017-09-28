@@ -27,7 +27,7 @@ import ${basepackage}.util.PageUtil;
 /**
  * @author huchao
  * @<#if now??>${now?string('yyyy-MM-dd')}</#if>
- * @description ${huchao1}的Service
+ * @description ${huchao_1}的Service
  */
 @Service
 @Transactional
@@ -44,7 +44,7 @@ public class ${className}ServiceImpl implements I${className}Service {
 	}
 
 	/**
-	 * 添加${huchao1}
+	 * 添加${huchao_1}
 	 */
 	public OutParams add${className}(Map<String, Object> beanIn) {
 		// 重新封装参数，需要哪些参数显示出来
@@ -66,7 +66,7 @@ public class ${className}ServiceImpl implements I${className}Service {
 	}
 
 	/**
-	 * 条件查询${huchao1}，可选分页展示，或者不分页展示（无pageFlag或者pageFlag为false）
+	 * 条件查询${huchao_1}，可选分页展示，或者不分页展示（无pageFlag或者pageFlag为false）
 	 * 
 	 * @throws BosException
 	 */
@@ -88,7 +88,7 @@ public class ${className}ServiceImpl implements I${className}Service {
 		return outParams;
 	}
 	/**
-	 * 根据${className}Id修改${huchao1}的数据
+	 * 根据${className}Id修改${huchao_1}的数据
 	 */
 	public OutParams updateBy${className}Id(Map<String, Object> beanIn) throws BosException {
 		// 重新封装参数，需要哪些参数显示出来
@@ -105,7 +105,7 @@ public class ${className}ServiceImpl implements I${className}Service {
 		return outParams;
 	}
 	/**
-	 * 根据Id删除${huchao1}
+	 * 根据Id删除${huchao_1}
 	 */
 	public OutParams deleteById(Map<String, Object> beanIn) throws BosException {
 		// 重新封装参数，需要哪些参数显示出来
