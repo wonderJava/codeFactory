@@ -1,0 +1,93 @@
+<#include "/macro.include"/>
+<#assign className = table.className>   
+<#assign classNameLower = className?uncap_first> 
+<#assign classNameFirstLower = table.classNameFirstLower> 
+  
+<#macro abc value>${r"#{"}${value},jdbc=varchar}</#macro>
+<#macro update value>${r"#{"}${value}Id}</#macro>
+<#macro jdbc value>${r"#{"}${value}}</#macro>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${className}Mapper" >
+<#macro mapperEl value>${r"#{"}${value}}</#macro>
+<#macro namespace>${className}.</#macro>
+
+<!-- 基本的sql语句 Start-->
+<!-- 最全数据库映射，这个映射不做sql片段使用，仅仅是声明，底下所有出现的字段都需要在这里显示， -->
+  <sql id="Property_Column_Map" >
+  <!-- 表字段 -->
+       
+  </sql>
+  <sql id="Base_${className}">
+  <#list table.columns as column>a.${column.sqlName}  ${column.columnNameFirstLower}<#if column_has_next>,</#if></#list>
+  </sql>
+  <!-- 然后是特定数据库映射 -->
+ <!-- 基本的sql语句  End-->
+<!-- ****************************************************************-->
+ <!-- select查询语句 Start-->
+<!-- huchao -->
+<!-- 根据${huchao_1}表组查询表信息 -->
+   <select id="query${className}ByCond" resultType="java.util.Map" parameterType="java.util.Map">
+   	select <include refid="Base_${className}"/> from ${table.sqlName} a
+   	where 1=1  
+   		<#list table.notPkColumns as column>
+		<if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+		    and  a.${column.sqlName} = <@mapperEl column.columnNameFirstLower/>   
+	     </if>
+	     </#list>
+      order by a.id asc
+	<if test="pageFlag == 'true' ">
+	  	limit <@mapperEl huchao_startRow/> ,<@mapperEl huchao_pageSize/> 
+	</if> 
+   </select>
+<!-- huchao -->
+ 
+ 
+ <!-- select查询语句 End-->
+<!-- ****************************************************************-->
+ <!-- insert插入语句 Start-->
+<insert id="insert${className}" parameterType="java.util.Map" >
+    insert into ${table.sqlName}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+    	<#list table.notPkColumns as column>
+	    <if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+	        ${column.sqlName}   ,
+        </if>
+	     </#list>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <#list table.notPkColumns as column>
+	   <if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+	       <@mapperEl column.columnNameFirstLower/>  ,
+      </if>
+	   </#list>
+    </trim>
+  </insert>
+ <!-- insert插入语句 End-->
+<!-- ****************************************************************-->
+ <!-- update修改语句 Start-->
+ <!-- 修改表的数据信息 -->
+ <update id="updateBy${className}Id"  parameterType="java.util.Map" >
+    update ${table.sqlName} 
+    <set >
+   		<#list table.notPkColumns as column>
+		<if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+		     ${column.sqlName} = <@mapperEl column.columnNameFirstLower/> ,
+	    </if>
+	   </#list>
+    </set>
+    where 
+     ${classNameLower}_id = <@update classNameLower/>
+  </update>
+ 
+ 
+ 
+ <!-- update修改语句 End-->
+<!-- ****************************************************************-->
+ <!-- delecte删除语句 Start-->
+ <delete id="deleteBy${className}Id" parameterType="java.util.Map" >
+      DELETE FROM ${table.sqlName} 
+      WHERE id = <@mapperEl huchao_id/>
+   </delete>
+ <!-- delecte删除语句 End-->
+</mapper>

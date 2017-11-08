@@ -115,7 +115,7 @@ public class ${className}ServiceImpl implements I${className}Service {
 		OutParams outParams = new OutParams();
 		int num = 0;
 		if (MapUtils.isNotEmpty(params)) {
-			num = getBaseDao().delete("${className}Mapper.deleteById", params);
+			num = getBaseDao().delete("${className}Mapper.deleteBy${className}Id", params);
 		}
 		if (num < 1) {
 			throw new BosException("删除数据失败");

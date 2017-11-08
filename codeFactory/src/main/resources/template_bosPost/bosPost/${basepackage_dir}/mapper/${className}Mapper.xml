@@ -85,7 +85,7 @@
  <!-- update修改语句 End-->
 <!-- ****************************************************************-->
  <!-- delecte删除语句 Start-->
- <delete id="deleteById" parameterType="java.util.Map" >
+ <delete id="deleteBy${className}Id" parameterType="java.util.Map" >
       DELETE FROM ${table.sqlName} 
       WHERE id = <@mapperEl huchao_id/>
    </delete>
