@@ -8,7 +8,7 @@
 <#macro jdbc value>${r"#{"}${value}}</#macro>
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="${className}Mapper" >
+<mapper namespace="${className?substring(3)}Mapper" >
 <#macro mapperEl value>${r"#{"}${value}}</#macro>
 <#macro namespace>${className}.</#macro>
 
@@ -18,8 +18,8 @@
   <!-- 表字段 -->
        
   </sql>
-  <sql id="Base_${className}">
-  <#list table.columns as column>a.${column.sqlName}  ${column.columnNameFirstLower}<#if column_has_next>,</#if></#list>
+  <sql id="Base_${className?substring(3)}">
+  <#list table.columns as column>a.${column.sqlName} ${column.columnNameFirstLower} <#if column_has_next>,</#if></#list>
   </sql>
   <!-- 然后是特定数据库映射 -->
  <!-- 基本的sql语句  End-->
@@ -27,13 +27,20 @@
  <!-- select查询语句 Start-->
 <!-- huchao -->
 <!-- 根据${huchao_1}表组查询表信息 -->
-   <select id="query${className}ByCond" resultType="java.util.Map" parameterType="java.util.Map">
-   	select <include refid="Base_${className}"/> from ${table.sqlName} a
+   <select id="query${className?substring(3)}ByCond" resultType="java.util.Map" parameterType="java.util.Map">
+   	select <include refid="Base_${className?substring(3)}"/> 
+   	from ${table.sqlName} a
    	where 1=1  
    		<#list table.notPkColumns as column>
-		<if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+   		<#if column.sqlTypeName == "DATETIME" || column.sqlTypeName == "INT">
+   		<if test="${column.columnNameFirstLower} != null " >
 		    and  a.${column.sqlName} = <@mapperEl column.columnNameFirstLower/>   
 	     </if>
+	     <#else>
+	     <if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+		    and  a.${column.sqlName} = <@mapperEl column.columnNameFirstLower/>   
+	     </if>
+	     </#if>
 	     </#list>
       order by a.id asc
 	<if test="pageFlag == 'true' ">
@@ -46,20 +53,32 @@
  <!-- select查询语句 End-->
 <!-- ****************************************************************-->
  <!-- insert插入语句 Start-->
-<insert id="insert${className}" parameterType="java.util.Map" >
+<insert id="insert${className?substring(3)}" parameterType="java.util.Map" >
     insert into ${table.sqlName}
     <trim prefix="(" suffix=")" suffixOverrides="," >
     	<#list table.notPkColumns as column>
-	    <if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+    	<#if column.sqlTypeName == "DATETIME" || column.sqlTypeName == "INT">
+    	 <if test="${column.columnNameFirstLower} != null " >
 	        ${column.sqlName}   ,
-        </if>
+         </if>
+        <#else>
+	     <if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+	        ${column.sqlName}   ,
+         </if>
+	     </#if>
 	     </#list>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <#list table.notPkColumns as column>
-	   <if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+      <#if column.sqlTypeName == "DATETIME" || column.sqlTypeName == "INT">
+        <if test="${column.columnNameFirstLower} != null  " >
 	       <@mapperEl column.columnNameFirstLower/>  ,
-      </if>
+      	</if>
+      <#else>
+	    <if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+	       <@mapperEl column.columnNameFirstLower/>  ,
+        </if>
+	   </#if>
 	   </#list>
     </trim>
   </insert>
@@ -67,13 +86,19 @@
 <!-- ****************************************************************-->
  <!-- update修改语句 Start-->
  <!-- 修改表的数据信息 -->
- <update id="updateBy${className}Id"  parameterType="java.util.Map" >
+ <update id="updateBy${className?substring(3)}Id"  parameterType="java.util.Map" >
     update ${table.sqlName} 
     <set >
    		<#list table.notPkColumns as column>
-		<if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+   		<#if column.sqlTypeName == "DATETIME" || column.sqlTypeName == "INT">
+   		<if test="${column.columnNameFirstLower} != null  " >
 		     ${column.sqlName} = <@mapperEl column.columnNameFirstLower/> ,
 	    </if>
+	   <#else>
+	    <if test="${column.columnNameFirstLower} != null and ${column.columnNameFirstLower} != '' " >
+		     ${column.sqlName} = <@mapperEl column.columnNameFirstLower/> ,
+	    </if>
+	   </#if>
 	   </#list>
     </set>
     where 
@@ -85,7 +110,7 @@
  <!-- update修改语句 End-->
 <!-- ****************************************************************-->
  <!-- delecte删除语句 Start-->
- <delete id="deleteBy${className}Id" parameterType="java.util.Map" >
+ <delete id="deleteBy${className?substring(3)}Id" parameterType="java.util.Map" >
       DELETE FROM ${table.sqlName} 
       WHERE id = <@mapperEl huchao_id/>
    </delete>

@@ -14,7 +14,7 @@ public class CodeGenerator {
 		// g.deleteOutRootDir();
 		// 通过数据库表生成文件
 		//g.generateByTable("subarea_decided_rela");//可以填入表名，多个表填多个参数
-		g.generateByTable("top_jzjf_online_record");//可以填入表名，多个表填多个参数
+		g.generateByTable("top_jzjf_apply","top_jzjf_set_meal");//可以填入表名，多个表填多个参数
 
 		// 自动搜索数据库中的所有表并生成文件,template为模板的根目录
 		// g.generateByAllTable();
